@@ -2,45 +2,62 @@ import "./App.css";
 import Form from "./Form";
 import List from "./List";
 
-import {useState} from 'react'
-
+import { useState } from "react";
 
 function App() {
-
   const [todos, setTodos] = useState([
-    { text: "Drink water",
-    checked: false
-   },
-    { text: "Save Earth",
-    checked: false },
-  ])
+    { text: " ¯\\_(ツ)_/¯", checked: false }
+  ]);
 
   let newTodos = [...todos];
 
+  newTodos.map((item) => localStorage.setItem(item.text, item.checked));
+
+  let localKeys = Object.keys(localStorage);
+  let localValues = Object.values(localStorage);
+
   const addTodo = (text) => {
-    newTodos = [...todos, { text, checked:false }];
+    newTodos = [...todos, { text, checked: false }];
     setTodos(newTodos);
     console.log(newTodos);
   };
 
   function itemChecked(e) {
-    e.target.parentElement.classList.toggle('done')
-    let checkedIndex = e.target.parentElement.getAttribute('data-id')
-    newTodos[checkedIndex].checked = !newTodos[checkedIndex].checked
-    console.log(newTodos[checkedIndex]);
+    let checkedKey = e.target.parentElement.getAttribute("data-key");
+    let checkedValue = e.target.parentElement.getAttribute("data-val");
+
+    if (checkedValue==='false'){
+      localStorage.setItem(checkedKey, 'true')
+      e.target.parentElement.classList.remove('done')
+      setTodos(newTodos);
+      console.log(checkedKey, checkedValue);
+
+    } else if (checkedValue==='true'){
+      localStorage.setItem(checkedKey, 'false')
+      e.target.parentElement.classList.add('done')
+      setTodos(newTodos);
+      console.log(checkedKey, checkedValue);
+
+    } else return
+
+
   }
 
   function itemDeleted(e) {
-    let removedIndex = e.target.parentElement.getAttribute('data-id')
-    newTodos.splice(removedIndex, 1)
+    let removedValue = e.target.parentElement.getAttribute("data-key");
+    localStorage.removeItem(removedValue)
     setTodos(newTodos);
-    console.log('deleted item number', Number(removedIndex)+1);
   }
 
   return (
     <div>
-      <Form newItem={addTodo}/>
-      <List listItems={todos} handleCheck={itemChecked} handleDelete={itemDeleted}/>
+      <Form newItem={addTodo} />
+      <List
+        listItems={localKeys}
+        listValues={localValues}
+        handleCheck={itemChecked}
+        handleDelete={itemDeleted}
+      />
     </div>
   );
 }
