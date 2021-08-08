@@ -9,26 +9,32 @@ function App() {
 
   const [todos, setTodos] = useState([
     { text: "Drink water",
-    checked: true
+    checked: false
    },
     { text: "Save Earth",
     checked: false },
   ])
 
+  let newTodos = [...todos];
+
   const addTodo = (text) => {
-    const newTodos = [...todos, { text, checked:false }];
+    newTodos = [...todos, { text, checked:false }];
     setTodos(newTodos);
     console.log(newTodos);
   };
 
   function itemChecked(e) {
     e.target.parentElement.classList.toggle('done')
-    console.log(e.target.parentElement);
+    let checkedIndex = e.target.parentElement.getAttribute('data-id')
+    newTodos[checkedIndex].checked = !newTodos[checkedIndex].checked
+    console.log(newTodos[checkedIndex]);
   }
 
   function itemDeleted(e) {
-    console.log('deleted item');
-    e.target.parentElement.remove()
+    let removedIndex = e.target.parentElement.getAttribute('data-id')
+    newTodos.splice(removedIndex, 1)
+    setTodos(newTodos);
+    console.log('deleted item number', Number(removedIndex)+1);
   }
 
   return (
