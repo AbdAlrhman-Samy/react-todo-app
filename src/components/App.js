@@ -32,7 +32,7 @@ function App() {
   }
 
   function itemDeleted(e) {
-    let removedIndex = e.target.parentElement.getAttribute('data-id')
+    let removedIndex = e.target.getAttribute('data-id')
     newTodos.splice(removedIndex, 1)
     setTodos(newTodos);
   }
