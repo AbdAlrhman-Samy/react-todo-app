@@ -1,8 +1,8 @@
-import "./App.css";
-import Form from "./Form";
+import MyForm from "./Form";
 import List from "./List";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState} from 'react'
+import { Container } from "react-bootstrap";
 
 
 function App() {
@@ -24,24 +24,25 @@ function App() {
   };
 
   function itemChecked(e) {
-    e.target.parentElement.classList.toggle('done')
-    let checkedIndex = e.target.parentElement.getAttribute('data-id')
+    let checkedIndex = e.target.getAttribute('data-id')
     newTodos[checkedIndex].checked = !newTodos[checkedIndex].checked
+    e.target.parentElement.parentElement.classList.toggle('text-decoration-line-through')
     console.log(newTodos[checkedIndex]);
+
   }
 
   function itemDeleted(e) {
     let removedIndex = e.target.parentElement.getAttribute('data-id')
     newTodos.splice(removedIndex, 1)
     setTodos(newTodos);
-    console.log('deleted item number', Number(removedIndex)+1);
   }
 
   return (
-    <div>
-      <Form newItem={addTodo}/>
+    <Container className="d-flex flex-column text-center" fluid="sm">
+      <h1 className="display-2 mb-5 text-white">What Are we doing today, boss?</h1>
+      <MyForm newItem={addTodo}/>
       <List listItems={todos} handleCheck={itemChecked} handleDelete={itemDeleted}/>
-    </div>
+    </Container>
   );
 }
 
