@@ -8,10 +8,10 @@ const List = ({ listItems, handleCheck, handleDelete }) => {
           <ListGroup.Item key={index} className="display-6 text-center d-flex justify-content-between">
             {listItem.text}
               <span className="p-0">
-              <Button className="mx-1 px-4" variant="success" onClick={handleCheck} data-id={index}>
+              <Button className="mx-1 px-2" variant="success" onClick={handleCheck} data-id={index}>
                 ✓
               </Button>
-              <Button className="mx-1 px-4" variant="danger" onClick={handleDelete} data-id={index}>
+              <Button className="mx-1 px-2" variant="danger" onClick={handleDelete} data-id={index}>
                 ✗
               </Button>
               </span>
