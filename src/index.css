@@ -14,12 +14,12 @@ body {
   height: 100vh;
 
 }
-
+/* 
 body::before{
   content: '';
   display: block;
   height: 10vh;
-}
+} */
 
 ul{
   list-style-type: none;

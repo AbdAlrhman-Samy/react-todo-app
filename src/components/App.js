@@ -39,7 +39,7 @@ function App() {
 
   return (
     <Container className="d-flex flex-column text-center" fluid="sm">
-      <h1 className="display-2 mb-5 text-white">What Are we doing today, boss?</h1>
+      <h1 className="display-2 my-5 text-white">What Are we doing today, boss?</h1>
       <MyForm newItem={addTodo}/>
       <List listItems={todos} handleCheck={itemChecked} handleDelete={itemDeleted}/>
     </Container>
