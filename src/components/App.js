@@ -41,6 +41,7 @@ function App() {
     <Container className="d-flex flex-column text-center" fluid="sm">
       <h1 className="display-2 my-5 text-white">What Are we doing today, boss?</h1>
       <MyForm newItem={addTodo}/>
+      <span className="lead text-white-50 mb-2">You have {newTodos.length} tasks.</span>
       <List listItems={todos} handleCheck={itemChecked} handleDelete={itemDeleted}/>
     </Container>
   );
